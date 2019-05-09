@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :products
 
+  get 'customers/email', to: 'customers#email'
+
   resources :customers do
     resource :address
     resources :orders do
@@ -29,9 +31,9 @@ Rails.application.routes.draw do
 
   resources :retour_lines, except: :create
 
-  constraints subdomain: 'api' do
-    api_version(:module => "V1", :path => {:value => "v1"}) do
-
-    end
-  end
+#  constraints subdomain: 'api' do
+#    api_version(:module => "V1", :path => {:value => "v1"}) do
+#
+#    end
+#  end
 end

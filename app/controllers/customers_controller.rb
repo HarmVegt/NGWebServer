@@ -37,6 +37,11 @@ class CustomersController < ApplicationController
     head 204
   end
 
+  def email
+    customer = Customer.find_by(email: params[:email])
+    render json: {customer: customer}, status: :ok
+  end
+
   private
 
   def customer_params
