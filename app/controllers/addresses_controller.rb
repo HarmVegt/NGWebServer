@@ -1,4 +1,4 @@
-class V1::AddressesController < ApplicationController
+class AddressesController < ApplicationController
 
 
   def index

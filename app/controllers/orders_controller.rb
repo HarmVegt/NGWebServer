@@ -1,4 +1,4 @@
-class V1::OrdersController < ApplicationController
+class OrdersController < ApplicationController
 
   def index
     if params[:customer_id]

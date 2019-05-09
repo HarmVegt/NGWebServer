@@ -1,4 +1,4 @@
-class V1::DeliverersController < ApplicationController
+class DeliverersController < ApplicationController
 
   def index
     deliverers = Deliverer.all

@@ -1,4 +1,4 @@
-class V1::OrderLinesController < ApplicationController
+class OrderLinesController < ApplicationController
 
   def index
     if params[:customer_id] && params[:order_id]

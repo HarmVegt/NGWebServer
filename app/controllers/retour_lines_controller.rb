@@ -1,4 +1,4 @@
-class V1::RetourLinesController < ApplicationController
+class RetourLinesController < ApplicationController
 
   def index
     if params[:customer_id] && params[:retour_id]
