@@ -1,0 +1,2 @@
+class Deliverer < ApplicationRecord
+end
