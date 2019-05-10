@@ -49,7 +49,11 @@ class CustomersController < ApplicationController
 
   def email
     customer = Customer.find_by(email: params[:email])
-    render json: {customer: customer}, status: :ok
+
+    respond_to do |format|
+      format.xml {render xml: customer.as_json}
+      format.json {render json: {customer: customer}, status: :ok}
+    end
   end
 
   private
