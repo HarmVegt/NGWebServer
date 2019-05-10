@@ -53,6 +53,7 @@ Customer.all.each do |customer|
 
   zipcode = ""
   housenumber = 0
+  street = ""
   city = ""
   annex = ""
   x = 0
@@ -64,6 +65,10 @@ Customer.all.each do |customer|
 
   2.times do
     zipcode = zipcode + letters[r.rand(26)]
+  end
+
+  r.rand(5..15).times do
+    street = street + letters[r.rand(26)]
   end
 
   r.rand(4..9).times do
@@ -80,7 +85,7 @@ Customer.all.each do |customer|
   y = r.rand(1000)
 
   customer.address = Address.create(zipcode: zipcode, housenumber: housenumber,
-                                    city: city, annex: annex, x: x, y: y)
+                                    street: street, city: city, annex: annex, x: x, y: y)
 end
 
 p "Addresses Created"
