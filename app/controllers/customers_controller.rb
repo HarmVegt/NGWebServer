@@ -1,8 +1,13 @@
 class CustomersController < ApplicationController
+  include ActionController::MimeResponds
 
   def index
     customers = Customer.all
-    render json: {customers: customers}, status: :ok
+
+    respond_to do |format|
+      format.json {render json: {customers: customers}, status: :ok}
+      format.xml {render xml: customers.as_json}
+    end
   end
 
   def create
@@ -18,7 +23,12 @@ class CustomersController < ApplicationController
 
   def show
     customer = Customer.find(params[:id])
-    render json: {customer: customer}, status: :ok
+
+    respond_to do |format|
+      format.json {render json: {customer: customer}, status: :ok}
+      format.xml {render xml: customer.as_json}
+    end
+
   end
 
   def update
