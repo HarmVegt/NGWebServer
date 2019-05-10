@@ -8,7 +8,10 @@ class OrdersController < ApplicationController
       orders = Order.all
     end
 
-    render json: {orders: orders}, status: :ok
+    respond_to do |format|
+      format.json {render json: {orders: orders}, status: :ok}
+      format.xml {render xml: orders.as_json}
+    end
   end
 
   def create
@@ -16,7 +19,10 @@ class OrdersController < ApplicationController
     order = customer.orders.new(product_params)
 
     if order.save
-      render json: {order: order}, status: :created
+      respond_to do |format|
+        format.json {render json: {order: order}, status: :created}
+        format.xml {render xml: order.as_json}
+      end
     else
       render json: {errors: order.errors}, status: :unprocessable_entity
     end
@@ -31,7 +37,10 @@ class OrdersController < ApplicationController
       order = Order.find(params[:id])
     end
 
-    render json: {order: order}, status: :ok
+    respond_to do |format|
+      format.json {render json: {order: order}, status: :ok}
+      format.xml {render xml: order.as_json}
+    end
   end
 
   def update
@@ -43,7 +52,10 @@ class OrdersController < ApplicationController
     end
 
     if order.update(order_params)
-      render json: {order: order}, status: :ok
+      respond_to do |format|
+        format.json {render json: {order: order}, status: :ok}
+        format.xml {render xml: order.as_json}
+      end
     else
       render json: {errors: order.errors}, status: :unprocessable_entity
     end

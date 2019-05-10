@@ -2,7 +2,10 @@ class ProductsController < ApplicationController
 
   def index
     products = Product.all
-    render json: {products: products}, status: :ok
+    respond_to do |format|
+      format.json {render json: {products: products}, status: :ok}
+      format.xml {render xml: products.as_json}
+    end
   end
 
   def create
@@ -16,7 +19,10 @@ class ProductsController < ApplicationController
     end
 
     if product.save
-      render json: {product: product}, status: :created
+      respond_to do |format|
+        format.json {render json: {product: product}, status: :created}
+        format.xml {render xml: product.as_json}
+      end
     else
       render json: {errors: product.errors}, status: :unprocessable_entity
     end
@@ -32,7 +38,10 @@ class ProductsController < ApplicationController
     else
       product = Product.find(params[:id])
     end
-    render json: {product: product}, status: :ok
+    respond_to do |format|
+      format.json {render json: {product: product}, status: :ok}
+      format.xml {render xml: product.as_json}
+    end
   end
 
   def update
@@ -46,7 +55,10 @@ class ProductsController < ApplicationController
     end
 
     if product.update(product_params)
-      render json: {product: product}, status: :ok
+      respond_to do |format|
+        format.json {render json: {product: product}, status: :ok}
+        format.xml {render xml: product.as_json}
+      end
     else
       render json: {errors: product.errors}, status: :unprocessable_entity
     end

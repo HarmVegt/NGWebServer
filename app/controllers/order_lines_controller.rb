@@ -8,7 +8,10 @@ class OrderLinesController < ApplicationController
     else
       order_lines = OrderLine.all
     end
-    render json: {order_lines: order_lines}, status: :ok
+    respond_to do |format|
+      format.json {render json: {order_lines: order_lines}, status: :ok}
+      format.xml {render xml: order_lines.as_json}
+    end
   end
 
   def create
@@ -17,7 +20,10 @@ class OrderLinesController < ApplicationController
     order_line = order.order_lines.new(order_line_params)
 
     if order_line.save
-      render json: {order_line: order_line}, status: :created
+      respond_to do |format|
+        format.json {render json: {order_line: order_line}, status: :created}
+        format.xml {render xml: order_line.as_json}
+      end
     else
       render json: {errors: order_line.errors}, status: :unprocessable_entity
     end
@@ -32,7 +38,10 @@ class OrderLinesController < ApplicationController
     else
       order_line = OrderLine.find(params[:id])
     end
-    render json: {order_line: order_line}, status: :ok
+    respond_to do |format|
+      format.json {render json: {order_line: order_line}, status: :ok}
+      format.xml {render xml: order_line.as_json}
+    end
   end
 
   def update
@@ -45,7 +54,10 @@ class OrderLinesController < ApplicationController
     end
 
     if order_line.update(order_line_params)
-      render json: {order_line: order_line}, status: :ok
+      respond_to do |format|
+        format.json {render json: {order_line: order_line}, status: :ok}
+        format.xml {render xml: order_line.as_json}
+      end
     else
       render json: {errors: order_line.errors}, status: :unprocessable_entity
     end

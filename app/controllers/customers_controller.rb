@@ -1,5 +1,4 @@
 class CustomersController < ApplicationController
-  include ActionController::MimeResponds
 
   def index
     customers = Customer.all
@@ -14,7 +13,11 @@ class CustomersController < ApplicationController
     customer = Customer.new(customer_params)
 
     if customer.save
-      render json: {customer: customer}, status: :created
+      respond_to do |format|
+        format.json {render json: {customer: customer}, status: :created}
+        format.xml {render xml: customer.as_json}
+      end
+
     else
       render json: {errors: customer.errors}, status: :unprocessable_entity
     end
@@ -35,7 +38,10 @@ class CustomersController < ApplicationController
     customer = Customer.find(params[:id])
 
     if customer.update(customer_params)
-      render json: {customer: customer}, status: :ok
+      respond_to do |format|
+        format.json {render json: {customer: customer}, status: :ok}
+        format.xml {render xml: customer.as_json}
+      end
     else
       render json: {errors: customer.errors}, status: :unprocessable_entity
     end

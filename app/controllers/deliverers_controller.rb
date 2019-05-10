@@ -2,14 +2,20 @@ class DeliverersController < ApplicationController
 
   def index
     deliverers = Deliverer.all
-    render json: {deliverers: deliverers}, status: :ok
+    respond_to do |format|
+      format.json {render json: {deliverers: deliverers}, status: :ok}
+      format.xml {render xml: deliverers.as_json}
+    end
   end
 
   def create
     deliverer = Deliverer.new(deliverer_params)
 
     if deliverer.save
-      render json: {deliverer: deliverer}, status: :created
+      respond_to do |format|
+        format.json {render json: {deliverer: deliverer}, status: :created}
+        format.xml {render xml: deliverer.as_json}
+      end
     else
       render json: {errors: deliverer.errors}, status: :unprocessable_entity
     end
@@ -18,14 +24,20 @@ class DeliverersController < ApplicationController
 
   def show
     deliverer = Deliverer.find(params[:id])
-    render json: {deliverer: deliverer}, status: :ok
+    respond_to do |format|
+      format.json {render json: {deliverer: deliverer}, status: :ok}
+      format.xml {render xml: deliverer.as_json}
+    end
   end
 
   def update
     deliverer = Deliverer.find(params[:id])
 
     if deliverer.update(deliverer_params)
-      render json: {deliverer: deliverer}, status: :ok
+      respond_to do |format|
+        format.json {render json: {deliverer: deliverer}, status: :ok}
+        format.xml {render xml: deliverer.as_json}
+      end
     else
       render json: {errors: deliverer.errors}, status: :unprocessable_entity
     end

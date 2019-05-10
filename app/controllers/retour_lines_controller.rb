@@ -8,7 +8,10 @@ class RetourLinesController < ApplicationController
     else
       retour_lines = RetourLine.all
     end
-    render json: {retour_lines: retour_lines}, status: :ok
+    respond_to do |format|
+      format.json {render json: {retour_lines: retour_lines}, status: :ok}
+      format.xml {render xml: retour_lines.as_json}
+    end
   end
 
   def create
@@ -17,7 +20,10 @@ class RetourLinesController < ApplicationController
     retour_line = retour.retour_lines.new(retour_line_params)
 
     if retour_line.save
-      render json: {retour_line: retour_line}, status: :created
+      respond_to do |format|
+        format.json {render json: {retour_line: retour_line}, status: :created}
+        format.xml {render xml: retour_line.as_json}
+      end
     else
       render json: {errors: retour_line.errors}, status: :unprocessable_entity
     end
@@ -32,7 +38,10 @@ class RetourLinesController < ApplicationController
     else
       retour_line = RetourLine.find(params[:id])
     end
-    render json: {retour_line: retour_line}, status: :ok
+    respond_to do |format|
+      format.json {render json: {retour_line: retour_line}, status: :ok}
+      format.xml {render xml: retour_line.as_json}
+    end
   end
 
   def update
@@ -45,7 +54,10 @@ class RetourLinesController < ApplicationController
     end
 
     if retour_line.update(retour_line_params)
-      render json: {retour_line: retour_line}, status: :ok
+      respond_to do |format|
+        format.json {render json: {retour_line: retour_line}, status: :ok}
+        format.xml {render xml: retour_line.as_json}
+      end
     else
       render json: {errors: retour_line.errors}, status: :unprocessable_entity
     end

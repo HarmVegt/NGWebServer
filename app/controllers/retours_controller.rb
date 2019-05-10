@@ -8,7 +8,10 @@ class RetoursController < ApplicationController
       retours = Retour.all
     end
 
-    render json: {retours: retours}, status: :ok
+    respond_to do |format|
+      format.json {render json: {retours: retours}, status: :ok}
+      format.xml {render xml: retours.as_json}
+    end
   end
 
   def create
@@ -16,7 +19,10 @@ class RetoursController < ApplicationController
     retour = customer.retours.new(retour_params0)
 
     if retour.save
-      render json: {retour: retour}, status: :created
+      respond_to do |format|
+        format.json {render json: {retour: retour}, status: :created}
+        format.xml {render xml: retour.as_json}
+      end
     else
       render json: {errors: retour.errors}, status: :unprocessable_entity
     end
@@ -31,7 +37,10 @@ class RetoursController < ApplicationController
       retour = Retour.find(params[:id])
     end
 
-    render json: {retour: retour}, status: :ok
+    respond_to do |format|
+      format.json {render json: {retour: retour}, status: :ok}
+      format.xml {render xml: retour.as_json}
+    end
   end
 
   def update
@@ -43,7 +52,10 @@ class RetoursController < ApplicationController
     end
 
     if retour.update(retour_params)
-      render json: {retour: retour}, status: :ok
+      respond_to do |format|
+        format.json {render json: {retour: retour}, status: :ok}
+        format.xml {render xml: retour.as_json}
+      end
     else
       render json: {errors: retour.errors}, status: :unprocessable_entity
     end

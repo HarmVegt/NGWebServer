@@ -1,9 +1,11 @@
 class AddressesController < ApplicationController
 
-
   def index
     addresses = Address.all
-    render json: {addresses: addresses}, status: :ok
+    respond_to do |format|
+      format.json {render json: {addresses: addresses}, status: :ok}
+      format.xml {render xml: addresses.as_json}
+    end
   end
 
   def create
@@ -11,7 +13,10 @@ class AddressesController < ApplicationController
     address = customer.address.new(address_params)
 
     if address.save
-      render json: {address: address}, status: :created
+      respond_to do |format|
+        format.json {render json: {address: address}, status: :created}
+        format.xml {render xml: address.as_json}
+      end
     else
       render json: {errors: address.errors}, status: :unprocessable_entity
     end
@@ -27,7 +32,10 @@ class AddressesController < ApplicationController
       address = Address.find(params[:id])
     end
 
-    render json: {address: address}, status: :ok
+    respond_to do |format|
+      format.json {render json: {address: address}, status: :ok}
+      format.xml {render xml: address.as_json}
+    end
   end
 
   def update
@@ -40,7 +48,10 @@ class AddressesController < ApplicationController
     end
 
     if address.update(address_params)
-      render json: {address: address}, status: :ok
+      respond_to do |format|
+        format.json {render json: {address: address}, status: :ok}
+        format.xml {render xml: address.as_json}
+      end
     else
       render json: {errors: address.errors}, status: :unprocessable_entity
     end
