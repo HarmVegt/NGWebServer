@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :products
 
+  #link 'customers'
+
   get 'customers/email', to: 'customers#email'
 
   resources :customers do
@@ -23,7 +25,9 @@ Rails.application.routes.draw do
 
   resources :deliverers
 
-  resources :orders, except: :create
+  resources :orders, except: :create do
+    resources :order_lines
+  end
 
   resources :order_lines, except: :create
 

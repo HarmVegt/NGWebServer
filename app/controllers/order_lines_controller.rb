@@ -5,9 +5,13 @@ class OrderLinesController < ApplicationController
       customer = Customer.find(params[:customer_id])
       order = customer.orders.find(params[:order_id])
       order_lines = order.order_lines
+    elsif !params[:customer_id] && params[:order_id]
+      order = Order.find(params[:order_id])
+      order_lines = order.order_lines
     else
       order_lines = OrderLine.all
     end
+
     respond_to do |format|
       format.json {render json: {order_lines: order_lines}, status: :ok}
       format.xml {render xml: order_lines.as_json}
