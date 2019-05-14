@@ -65,6 +65,7 @@ class CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:firstname, :lastname, :preposition, :email, :address_id)
+    #params.permit(:authKey)
+    params.permit(:firstname, :lastname, :preposition, :email, :address_id, :id)
   end
 end
