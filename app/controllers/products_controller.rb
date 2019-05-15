@@ -1,7 +1,13 @@
 class ProductsController < ApplicationController
 
   def index
-    products = Product.all
+    if params[:customer_id]
+      customer = Customer.find(params[:customer_id])
+      products = customer.products
+    else
+      products = Product.all
+    end
+
     respond_to do |format|
       format.json {render json: {products: products}, status: :ok}
       format.xml {render xml: products.as_json}
