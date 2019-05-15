@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   #link 'customers'
 
   get 'customers/email', to: 'customers#email'
+  get "customers/:customer_id/order_lines", to: 'order_lines#index', as: "customer_order_lines"
 
   resources :customers do
     resource :address

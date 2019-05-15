@@ -8,6 +8,9 @@ class OrderLinesController < ApplicationController
     elsif !params[:customer_id] && params[:order_id]
       order = Order.find(params[:order_id])
       order_lines = order.order_lines
+    elsif params[:customer_id] && !params[:order_id]
+      customer = Customer.find(params[:customer_id])
+      order_lines = customer.order_lines
     else
       order_lines = OrderLine.all
     end
