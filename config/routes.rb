@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "customers/:customer_id/order_lines", to: 'order_lines#index', as: "customer_order_lines"
   get "customers/:customer_id/products", to: "products#index", as: "customer_products"
 
+  get "customers/:customer_id/retours/bizagi", to: "retours#bizagi", as: "retours_bizagi"
+  
   resources :customers do
     resource :address
     resources :orders do

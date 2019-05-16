@@ -43,6 +43,12 @@ class RetoursController < ApplicationController
     end
   end
 
+  def bizagi
+    customer = Customer.find(params[:customer_id])
+    p params
+
+  end
+
   def update
     if params[:customer_id]
       customer = Customer.find(params[:customer_id])
@@ -76,7 +82,7 @@ class RetoursController < ApplicationController
   private
 
   def retour_params
-    params.require(:retour).permit(:customer_id, :status)
+    params.permit(:customer_id, :status, :id)
   end
 
 end
