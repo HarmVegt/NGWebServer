@@ -45,7 +45,14 @@ class RetoursController < ApplicationController
 
   def bizagi
     customer = Customer.find(params[:customer_id])
-    p params
+    retour = customer.retours.create(status: "Niet gepland")
+
+    params[:retour_lines].each do |line|
+      product = Product.find(line[:product_id])
+      amount = line[:amount]
+
+      retour.retour_lines.create(product: product, amount: amount)
+    end
 
   end
 
