@@ -16,6 +16,8 @@ prepositions = ["van", "van der", "van den", "van de", "de", "", ""]
 p "Creating Customers"
 
 MAX_DELIVERERS.times do
+  r = Random.new
+
   firstname = Faker::Name.first_name
   lastname = Faker::Name.last_name
   preposition = prepositions[r.rand(7)]
