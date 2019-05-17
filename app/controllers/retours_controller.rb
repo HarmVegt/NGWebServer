@@ -46,6 +46,7 @@ class RetoursController < ApplicationController
   def bizagi
     p params[:retour_lines]
     if !request.headers['Content-Type'].blank?
+
       p request.headers['Content-Type']
     else
       p "HELP BIZAGI HOUDT MIJ GIJZELAAR"
@@ -54,7 +55,7 @@ class RetoursController < ApplicationController
     customer = Customer.find(params[:customer_id])
     retour = customer.retours.create(status: "Niet gepland")
 
-    params[:retour_lines].each do |line|
+    params[:_json].each do |line|
       product = Product.find(line[:product_id])
       amount = line[:amount]
 
