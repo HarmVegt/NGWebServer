@@ -9,8 +9,9 @@ class OrderLinesController < ApplicationController
       order = Order.find(params[:order_id])
       order_lines = order.order_lines
     elsif params[:customer_id] && !params[:order_id]
+      #Bizagi only
       customer = Customer.find(params[:customer_id])
-      order_lines = customer.order_lines
+      order_lines = customer.order_lines.where(returned: !true)
     else
       order_lines = OrderLine.all
     end
@@ -86,6 +87,6 @@ class OrderLinesController < ApplicationController
   private
 
   def order_line_params
-    params.require(:order_line).permit(:amount)
+    params.require(:order_line).permit(:amount, :returned)
   end
 end
