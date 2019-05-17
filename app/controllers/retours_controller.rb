@@ -44,6 +44,7 @@ class RetoursController < ApplicationController
   end
 
   def bizagi
+    p params
     customer = Customer.find(params[:customer_id])
     retour = customer.retours.create(status: "Niet gepland")
 
