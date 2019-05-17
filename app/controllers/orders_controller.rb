@@ -14,6 +14,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def bizagi
+    customer = Customer.find(params[:customer_id])
+    orders = customer.orders.where(status: "Bezorgd")
+    render xml: orders.as_json
+  end
+
   def create
     customer = Customer.find(params[:customer_id])
     order = customer.orders.new(product_params)
