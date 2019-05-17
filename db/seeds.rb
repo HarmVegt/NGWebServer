@@ -119,9 +119,9 @@ Customer.all.each do |customer|
   r = Random.new
 
   r.rand(1..10).times do
-    statusArray = ["Niet verzonden", "Verzonden"]
+    statusArray = ["Niet verzonden", "Verzonden", "Bezorgd"]
 
-    customer.orders.create(status: statusArray[r.rand(0..1)])
+    customer.orders.create(status: statusArray[r.rand(0..2)])
   end
 end
 
