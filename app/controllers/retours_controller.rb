@@ -45,7 +45,12 @@ class RetoursController < ApplicationController
 
   def bizagi
     p params[:retour_lines]
-    p request.headers['Content-Type']
+    if !request.headers['Content-Type'].blank?
+      p request.headers['Content-Type']
+    else
+      p "HELP BIZAGI HOUDT MIJ GIJZELAAR"
+      p "XX" + request.headers['Content-Type'] + "XX"
+    end
     customer = Customer.find(params[:customer_id])
     retour = customer.retours.create(status: "Niet gepland")
 
