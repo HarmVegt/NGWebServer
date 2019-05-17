@@ -11,13 +11,21 @@ MAX_DELIVERERS = 30
 
 letters = "abcdefghijklmnopqrstuvwxyz"
 numbers = "0123456789"
+prepositions = ["van", "van der", "van den", "van de", "de", "", ""]
 
 p "Creating Customers"
+
+MAX_DELIVERERS.times do
+  firstname = Faker::Name.first_name
+  lastname = Faker::Name.last_name
+  preposition = prepositions[r.rand(7)]
+
+  Deliverer.create(firstname: firstname, lastname: lastname, preposition: preposition)
+end
 
 MAX_CUSTOMERS.times do
   r = Random.new
 
-  prepositions = ["van", "van der", "van den", "van de", "de", "", ""]
 
   firstname = Faker::Name.first_name
   lastname = Faker::Name.last_name
@@ -129,7 +137,7 @@ Order.all.each do |order|
     product = Product.offset(rand(Product.count)).first
     amount = r.rand(1..10)
 
-    order.order_lines.create(product: product, amount: amount)
+    order.order_lines.create(product: product, amount: amount, returned: false )
 
   end
 end
