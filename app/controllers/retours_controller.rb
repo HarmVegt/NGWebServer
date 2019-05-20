@@ -58,8 +58,10 @@ class RetoursController < ApplicationController
     params[:_json].each do |line|
       product = Product.find(line[:product_id])
       amount = line[:amount]
+      order_line = OrderLine.find(line[:order_line_id])
 
       retour.retour_lines.create(product: product, amount: amount)
+      order_line.returned = true
     end
 
   end
