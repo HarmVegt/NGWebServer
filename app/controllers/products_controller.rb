@@ -70,6 +70,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def increase_amount
+    params[:_json].each do |retour|
+      product = Product.find(retour[:product_id])
+      amount = product.amount
+      product.amount = product.amount + retour[:amount]
+      product.save
+      p "Previous: #{amount}"
+      p "New: #{product.amount}"
+    end
+  end
+
   def destroy
     if params[:customer_id] && params[:order_id] && params[:order_line_id]
       customer = Customer.find(params[:customer_id])

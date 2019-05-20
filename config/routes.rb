@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "customers/:customer_id/products", to: "products#index", as: "customer_products"
   get "customers/:customer_id/orders/bizagi", to: "orders#bizagi"
   post "customers/:customer_id/retours/bizagi", to: "retours#bizagi", as: "retours_bizagi"
+  post "products/increase_amount", to: "products#increase_amount"
 
   resources :customers do
     resource :address
