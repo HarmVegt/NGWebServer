@@ -34,24 +34,6 @@ MAX_CUSTOMERS.times do
   preposition = prepositions[r.rand(7)]
   email = Faker::Internet.unique.email
 
-  # "#{r.rand(2..15).times do
-  #   firstname = firstname + letters[r.rand(26)]
-  # end
-  #
-  # r.rand(3..16).times do
-  #   lastname = lastname + letters[r.rand(26)]
-  # end
-  #
-  # r.rand(2..4).times do
-  #   preposition = preposition + letters[r.rand(26)]
-  # end
-  #
-  # r.rand(5).times do
-  #   email = email + letters[r.rand(26)]
-  # end
-  #
-  # email = email + "@random.org"}"
-
   Customer.create(firstname: firstname, lastname: lastname, preposition: preposition, email: email)
 
 end
@@ -118,7 +100,7 @@ p "Creating Orders"
 Customer.all.each do |customer|
   r = Random.new
 
-  r.rand(1..10).times do
+  r.rand(1..8).times do
     statusArray = ["Niet verzonden", "Verzonden", "Bezorgd"]
 
     customer.orders.create(status: statusArray[r.rand(0..2)])
@@ -137,7 +119,7 @@ Order.all.each do |order|
 
   r.rand(1..4).times do
     product = Product.offset(rand(Product.count)).first
-    amount = r.rand(1..10)
+    amount = r.rand(1..3)
 
     order.order_lines.create(product: product, amount: amount, returned: false )
 
