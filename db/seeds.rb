@@ -67,8 +67,8 @@ Customer.all.each do |customer|
     annex = annex + letters[r.rand(26)]
   end
 
-  x = r.rand(1000)
-  y = r.rand(1000)
+  x = r.rand(599)
+  y = r.rand(599)
 
   customer.address = Address.create(zipcode: zipcode, housenumber: housenumber,
                                     street: street, city: city, annex: annex, x: x, y: y)
