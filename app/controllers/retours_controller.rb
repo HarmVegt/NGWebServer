@@ -62,6 +62,7 @@ class RetoursController < ApplicationController
 
       retour.retour_lines.create(product: product, amount: amount)
       order_line.returned = true
+      order_line.save
     end
 
   end
